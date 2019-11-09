@@ -69,6 +69,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.devotedmc.ExilePearl.ExilePearl;
 import com.devotedmc.ExilePearl.ExilePearlApi;
+import com.devotedmc.ExilePearl.ExileRule;
 import com.devotedmc.ExilePearl.Lang;
 import com.devotedmc.ExilePearl.PearlFreeReason;
 import com.devotedmc.ExilePearl.PearlType;
@@ -579,7 +580,7 @@ public class PlayerListener implements Listener, Configurable {
 		
 		if (killer != null) {
 			//Reset bed of exiled player if killer is not null
-			if (pearlApi.getPearlConfig().canPerform(ExileRule.SPAWN_RESET)) {
+			if (pearlApi.isPlayerExiled(playerId) && pearlApi.getPearlConfig().canPerform(ExileRule.SPAWN_RESET)) {
 				pearl.getPlayer().setBedSpawnLocation(null,true);
 			}
 			// Notify other damagers if they were not awarded the pearl
