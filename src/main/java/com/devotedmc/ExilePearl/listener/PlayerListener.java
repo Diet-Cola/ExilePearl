@@ -542,6 +542,10 @@ public class PlayerListener implements Listener, Configurable {
 		
 		// Check is player is already exiled
 		if (pearlApi.isPlayerExiled(playerId)) {
+			//Reset bed of exiled player if killer is not null
+			if (pearlApi.getPearlConfig().canPerform(ExileRule.SPAWN_RESET)) {
+				pearl.getPlayer().setBedSpawnLocation(null,true);
+			}
 			for(Player damager : damagers) {
 				msg(damager, Lang.pearlAlreadyPearled, pearlApi.getRealPlayerName(playerId));
 			}
@@ -579,10 +583,6 @@ public class PlayerListener implements Listener, Configurable {
 		}
 		
 		if (killer != null) {
-			//Reset bed of exiled player if killer is not null
-			if (pearlApi.isPlayerExiled(playerId) && pearlApi.getPearlConfig().canPerform(ExileRule.SPAWN_RESET)) {
-				pearl.getPlayer().setBedSpawnLocation(null,true);
-			}
 			// Notify other damagers if they were not awarded the pearl
 			for(Player damager : damagers) {
 				if (damager != killer) {
