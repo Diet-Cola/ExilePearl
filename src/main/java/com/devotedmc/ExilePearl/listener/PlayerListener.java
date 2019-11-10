@@ -525,6 +525,8 @@ public class PlayerListener implements Listener, Configurable {
 		}
 
 		final UUID playerId;
+		Player killer = null;
+		ExilePearl pearl = null;
 		
 		// If the player was an NPC, grab the ID from it
 		NpcIdentity npcId = null;
@@ -551,10 +553,7 @@ public class PlayerListener implements Listener, Configurable {
 			}
 			return;
 		}
-		
-		Player killer = null;
-		ExilePearl pearl = null;
-		
+
 		for(Player damager : damagers) {
 			int firstpearl = Integer.MAX_VALUE;
 			for (Entry<Integer, ? extends ItemStack> entry : damager.getInventory().all(Material.ENDER_PEARL).entrySet()) {
